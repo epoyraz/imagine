@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "imagine-cli"
+version = "0.1.0"
+description = "CLI tool for AI image generation - generates images via Lumenfall API and displays them inline in the terminal"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "Imagine" }]
+keywords = ["cli", "image-generation", "ai", "lumenfall", "terminal"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Graphics",
+]
+dependencies = [
+    "openai>=1.0.0",
+    "imgcat>=0.6.0",
+    "typer[all]>=0.9.0",
+    "Pillow>=10.0.0",
+    "textual>=0.68.0",
+    "textual-image[textual]>=0.6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[project.scripts]
+imagine = "imagine.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/imagine-cli/imagine"
+Documentation = "https://github.com/imagine-cli/imagine#readme"
+Repository = "https://github.com/imagine-cli/imagine"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
