@@ -1,0 +1,23 @@
+.gitignore
+  6adcc1535c7cb981 11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.8",
+  "base_commit_sha": "9a3287c64616ea1d90e268c31c5273f18d25f71d",
+  "prompts": {
+    "6adcc1535c7cb981": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "e1106d5f-a564-43cd-8757-f4e0c296aff4",
+        "model": "default"
+      },
+      "human_author": "Enes Poyraz <epoyraz.eth@googlemail.com>",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
