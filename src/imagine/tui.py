@@ -20,6 +20,9 @@ from textual.worker import get_current_worker
 from .config import validate_api_key
 from .lumenfall import generate_image, list_models
 
+# For testing: bypass API and always show this image
+TEST_IMAGE_PATH = Path(__file__).resolve().parent.parent.parent / "intense-anime-portrait-stockcake.webp"
+
 SLASH_COMMANDS = [("/model", "models"), ("/exit", "exit")]
 
 
@@ -366,16 +369,21 @@ class ImagineApp(App[None]):
         worker = get_current_worker()
         self._add_generating()
         try:
-            validate_api_key()
-            image_bytes = await asyncio.to_thread(
-                generate_image,
-                prompt=prompt,
-                model=self.settings["model"],
-                size=self.settings["size"],
-            )
-            if worker.is_cancelled:
-                return
-            self._remove_temp_status()
+            if TEST_IMAGE_PATH.exists():
+                image_bytes = TEST_IMAGE_PATH.read_bytes()
+                self._remove_temp_status()
+                self._add_status("(test mode: showing local image)", classes="status")
+            else:
+                validate_api_key()
+                image_bytes = await asyncio.to_thread(
+                    generate_image,
+                    prompt=prompt,
+                    model=self.settings["model"],
+                    size=self.settings["size"],
+                )
+                if worker.is_cancelled:
+                    return
+                self._remove_temp_status()
             save_path = Path.cwd() / f"imagine_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png"
             save_path.write_bytes(image_bytes)
             self._add_image(image_bytes)

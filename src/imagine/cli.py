@@ -10,7 +10,7 @@ from .display import display_image
 from .lumenfall import generate_image, list_models
 
 # For testing: bypass API and always show this image
-TEST_IMAGE_PATH = Path(__file__).resolve().parent.parent.parent / "120355-piece-high-quality-anime-one-png-file-hd.png"
+TEST_IMAGE_PATH = Path(__file__).resolve().parent.parent.parent / "intense-anime-portrait-stockcake.webp"
 
 app = typer.Typer(
     name="imagine",
